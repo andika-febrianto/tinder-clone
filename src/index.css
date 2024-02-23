@@ -26,7 +26,21 @@ body{
   background: linear-gradient(260deg,rgb(254, 47, 112),rgb(255, 89, 64));
   cursor: pointer;
 }
-
+.secondary-button{
+  color: rgb(121, 119, 119);
+  background-color: rgb(255, 255, 255);
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: uppercase;
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: solid 2px rgb(121, 119, 119);
+  margin: 6px;
+}
+.secondary-button:hover{
+  color: rgb(48,48,48);
+  border: solid 2px rgb(48,48,48);;
+}
 /* ------ Navbar ------ */
 nav{
   width: 100%;
@@ -51,11 +65,32 @@ nav .nav-button{
   border: none;
   margin: 10px;
 }
+nav .nav-button:disabled {
+  background-color: rgba(181,180,180);
+  color: rgb(132, 127, 127);
+}
 
 /* -------Home Page------ */
 .overlay{
   width: 100vw;
   height: 100vh;
   position: fixed;
-  background: linear-gradient(to bottom, rgba(0,0,0.65)0%,rgba(0,0 , 0)100%);
+  background: linear-gradient(to bottom, rgb(64, 64, 67)0%,rgb(205, 192, 192)100%);
+}
+
+/* -------Authmodal------ */
+.auth-modal{
+  position:relative;
+  top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 360px;
+  height: 600px;
+  background-color: rgba(255,255,255);
+  border-radius: 10px;
+  padding: 40px;
+}
+
+.auth-modal .close-icon{
+  float: right;
 }
