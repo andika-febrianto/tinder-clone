@@ -10,7 +10,7 @@ const OnBoarding = () => {
     dob_year:'',
     show_gender: false,
     gender_identity: 'man',
-    gender_interest:'women',
+    gender_interest: 'women',
     email:'',
     url:'',
     about:'',
@@ -23,12 +23,14 @@ const OnBoarding = () => {
 
   const handleChange = (e)=>{
     const name = e.target.name
-    const value = e.target.value
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
 
     setFormData((prevState)=>({ ...prevState,
       [name]:value}))
   
   }
+
+  console.log(formData);
 
   return (
     <>
@@ -83,31 +85,31 @@ const OnBoarding = () => {
             <div className='multiple-input-container'>
               <input  id='man-gender-identity'
                 type='radio'
-                name='gander_identity'
+                name='gender_identity'
                 required={true}
                 value="man"
                 onChange={handleChange}
-                checked={false}
+                checked={formData.gender_identity ==='man'}
               />
               <label htmlFor='man-gender-identity'>Man</label>
               
               <input  id='woman-gender-identity'
                   type='radio'
-                  name='gander_identity'
+                  name='gender_identity'
                   required={true}
                   value="woman"
                   onChange={handleChange}
-                  checked={false}
+                  checked={formData.gender_identity === 'women'}
               />
               <label htmlFor='woman-gender-identity'>Woman</label>
               
               <input id='more-gender-identity'
                   type='radio'
-                  name='gander_identity'
+                  name='gender_identity'
                   required={true}
                   value="more"
                   onChange={handleChange}
-                  checked={false}
+                  checked={formData.gender_identity === 'more'}
               />
               <label htmlFor='more-gender-identity'>More</label>
             </div>
@@ -118,37 +120,37 @@ const OnBoarding = () => {
                   name='show_gender'
                   required={true}
                   onChange={handleChange}
-                  checked={false}
+                  checked={formData.show_gender}
               />
 
               <label>Show me</label>
               <div className='multiple-input-container'>
                 <input  id='man-gender-interest'
                   type='radio'
-                  name='gander_interest'
+                  name='gender_interest'
                   required={true}
                   value="man"
                   onChange={handleChange}
-                  checked={false}
+                  checked={formData.gender_interest ==='man'}
                 />
                 <label htmlFor='man-gender-interest'>Man</label>
                 <input  id='woman-gender-interest'
                     type='radio'
-                    name='gander_interest'
+                    name='gender_interest'
                     required={true}
                     value="woman"
                     onChange={handleChange}
-                    checked={false}
+                    checked={formData.gender_interest ==='women'}
                 />
                 <label htmlFor='woman-gender-interest'>Woman</label>
                 
                 <input id='everyone-gender-interest'
                     type='radio'
-                    name='gander_interest'
+                    name='gender_interest'
                     required={true}
                     value="everyone"
                     onChange={handleChange}
-                    checked={false}
+                    checked={formData.gender_interest === 'everyone'}
                 />
                 <label htmlFor='everyone-gender-interest'>Everyone</label>
               </div>
@@ -174,7 +176,7 @@ const OnBoarding = () => {
                 required={true}
             />
             <div className='photo-container'>
-
+              <img src={formData.url} alt='fdsa'/>
             </div>
           </section>
         </form>
