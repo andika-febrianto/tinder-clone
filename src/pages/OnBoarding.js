@@ -12,7 +12,6 @@ const OnBoarding = () => {
     gender_identity: 'man',
     gender_interest:'women',
     email:'',
-    url:''
   })
 
   const handleSubmit =()=>{
