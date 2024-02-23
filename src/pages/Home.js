@@ -22,10 +22,10 @@ const Home = () => {
            setIsSignUp ={setIsSignUp}/>
 
       <div className='home'>
-        <h1 className='primary-title'>Swipe Right@</h1>
+        <h1 className='primary-title'>Swipe Right®</h1>
         <button className='primary-button' onClick={handleClick}>
           {outhToken ? 'SignOut': 'Create Account'}
-        </button>
+        </button> 
 
         {showModal && <AuthModal  setShowModal={setShowModal}
                                   isSignUp={isSignUp} />}
