@@ -3,14 +3,18 @@
 html, body{
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 
 *{
   font-family: 'Readex Pro', sans-serif;
 }
-body{
-  text-align: center;
+ 
+.primary-title {
+  font-size: 30px;
+  color: rgba(255,255,255);
 }
+
 .primary-button{
   color: #fff;
   text-transform: uppercase;
@@ -20,6 +24,9 @@ body{
   padding: 12px 30px;
   border-radius: 30px;
   border: none;
+}
+h2 {
+  font-style: italic;
 }
 
 .primary-button:hover{
@@ -44,8 +51,11 @@ body{
 /* ------ Navbar ------ */
 nav{
   width: 100%;
+  height: 75px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
 }
 
 nav .logo-container{
@@ -60,7 +70,8 @@ nav .nav-button{
   color: rgba(254,48 , 114);
   background-color: rgb(255, 255, 255);
   font-size: 20px;
-  padding: 10px 20px;
+  padding: 5px 20px;
+  height: 40px;
   border-radius: 10px;
   border: none;
   margin: 10px;
@@ -75,13 +86,18 @@ nav .nav-button:disabled {
   width: 100vw;
   height: 100vh;
   position: fixed;
-  background: linear-gradient(to bottom, rgb(64, 64, 67)0%,rgb(205, 192, 192)100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0,0.65)0%,
+  rgba(0, 0, 0,0)100%),url('images/cf11930093976a50329858777bae1bde.webp') no-repeat;
 }
-
+.home{
+  margin-top: 30vh;
+}
 /* -------Authmodal------ */
 .auth-modal{
-  position:relative;
-  top: 15px;
+  position:absolute;
+  left: 0;
+  right: 0;
+  top: 30px;
   margin-left: auto;
   margin-right: auto;
   width: 360px;
@@ -93,4 +109,16 @@ nav .nav-button:disabled {
 
 .auth-modal .close-icon{
   float: right;
+}
+
+.auth-modal form{
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-modal input[type=password],
+input[type=email]
+{
+  padding: 8px;
+  margin: 8px;
 }
