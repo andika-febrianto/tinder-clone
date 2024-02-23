@@ -1,8 +1,13 @@
 import React from 'react'
+import Nav from '../components/Nav'
 
 const OnBoarding = () => {
   return (
-    <div>OnBoarding</div>
+    <>
+     <Nav minimal={true} 
+           setShowModal={()=>{}} 
+           setIsSignUp ={false}/>
+    </>
   )
 }
 
