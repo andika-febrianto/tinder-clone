@@ -21,8 +21,13 @@ const OnBoarding = () => {
     
   }
 
-  const handleChange = ()=>{
+  const handleChange = (e)=>{
+    const name = e.target.name
+    const value = e.target.value
 
+    setFormData((prevState)=>({ ...prevState,
+      [name]:value}))
+  
   }
 
   return (
@@ -42,7 +47,7 @@ const OnBoarding = () => {
               name='first_name'
               placeholder='First Name'
               required={true}
-              value={""}
+              value={formData.first_name}
               onChange={handleChange}
             />
             
@@ -53,7 +58,7 @@ const OnBoarding = () => {
                 name='dob_day'
                 placeholder='DD'
                 required={true}
-                value={""}
+                value={formData.dob_day}
                 onChange={handleChange}
               />
               <input  id='dob_month'
@@ -61,7 +66,7 @@ const OnBoarding = () => {
                 name='dob_month'
                 placeholder='MM'
                 required={true}
-                value={""}
+                value={formData.dob_month}
                 onChange={handleChange}
               />
               <input  id='dob_year'
@@ -69,7 +74,7 @@ const OnBoarding = () => {
                 name='dob_year'
                 placeholder='YYYY'
                 required={true}
-                value={""}
+                value={formData.dob_year}
                 onChange={handleChange}
               />
             </div>
@@ -153,7 +158,7 @@ const OnBoarding = () => {
               name='about'
               required={true}
               placeholder='I like long walks'
-              value=''
+              value={formData.about}
               onChange={handleChange}
             />
             <input type='submit'/>
