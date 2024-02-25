@@ -63,7 +63,6 @@ app.post('/login', async(req,res)=>{
     const users = await database.collection('users')
     const user = await users.findOne({email})
 
-    console.log(user)
     const correctPassword = await bcrypt.compare(password, user.hashed_password)
 
     if(user && correctPassword){
@@ -81,6 +80,24 @@ app.post('/login', async(req,res)=>{
 
 })
 
+app.get('/user', async (req, res)=>{
+  const client = new MongoClient(url)
+  const  userId = req.query.userId
+  try {
+      await client.connect()
+      const database = await client.db('tinder-clone')
+
+      const users = await database.collection('users')
+      const query = ({ user_id: userId})
+
+      const user = await users.findOne(query)
+
+      res.send(user)
+
+  } finally {
+    await client.close()
+  }
+})
 
 app.get('/users', async (req, res)=>{
   const client = new MongoClient(url)
@@ -111,7 +128,7 @@ app.put('/user', async(req,res)=>{
       $set : {
           first_name: formData.first_name,
           dob_day: formData.dob_day,
-          dob_month: formData.dob_day,
+          dob_month: formData.dob_month,
           dob_year: formData.dob_year,
           show_gender: formData.show_gender,
           gender_identity: formData.gender_identity,

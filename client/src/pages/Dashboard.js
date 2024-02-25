@@ -1,11 +1,42 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TinderCard from 'react-tinder-card'
 import ChatContainer from '../components/ChatContainer'
-
+import axios from 'axios'
+import { useCookies } from 'react-cookie'
 // source code react tinder card
 // https://github.com/3DJakob/react-tinder-card-demo/blob/master/src/examples/Simple.js
 
 const Dashboard = () => {
+  const [user, setUser] = useState()
+  const [cookie, setCookies] = useCookies(['user'])
+  const userId = cookie.UserId
+  
+  const getUser = async ()=>{
+    try {
+      
+      const response = await axios.get('http://localhost:8888', {params: { userId}})
+      setUser(response.data)
+
+    } catch (error) {
+      console.log(error)      
+    }
+  }
+
+  const getGenderedUsers = async ()=>{
+    try {
+      const response = await axios.get('http://localhost:8000/genderedusers')
+
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  
+  useEffect(()=>{
+    getUser()
+  },[])
+
   const characters = [
     {
       name: 'Richard Hendricks',
@@ -41,23 +72,27 @@ const Dashboard = () => {
   }
 
   return (
-    <div className='dashboard'>
-      <ChatContainer />
-      <div className='swiper-container'>
-        <div className='card-container'>
-          {characters.map((character) =>
-            <TinderCard className='swipe' key={character.name} onSwipe={(dir) => swiped(dir, character.name)} onCardLeftScreen={() => outOfFrame(character.name)}>
-              <div style={{ backgroundImage: 'url(' + character.url + ')' }} className='card'>
-                <h3>{character.name}</h3>
-                {console.log(character.url)}
-              </div>
-            </TinderCard>
-          )}
+    <>
+    { user && 
+      <div className='dashboard'>
+        <ChatContainer user={ user }/>
+        <div className='swiper-container'>
+          <div className='card-container'>
+            {characters.map((character) =>
+              <TinderCard className='swipe' key={character.name} onSwipe={(dir) => swiped(dir, character.name)} onCardLeftScreen={() => outOfFrame(character.name)}>
+                <div style={{ backgroundImage: 'url(' + character.url + ')' }} className='card'>
+                  <h3>{character.name}</h3>
+                  {console.log(character.url)}
+                </div>
+              </TinderCard>
+            )}
 
-          {lastDirection ? <h2 className='swipe-info'>You swiped {lastDirection}</h2> : <h2 className='swipe-info'/> }
+            {lastDirection ? <h2 className='swipe-info'>You swiped {lastDirection}</h2> : <h2 className='swipe-info'/> }
+          </div>
         </div>
       </div>
-    </div>
+    }
+    </>
   )
 }
 
