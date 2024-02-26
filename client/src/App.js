@@ -8,19 +8,15 @@ import './index.css'
 const App=()=> {
   const [cookie, setCookies] = useCookies(['user'])
 
-  const authToken = cookie.authToken
+  const authToken = cookie.AuthToken
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home/>}/> 
-        { authToken && <>
-            <Route path='/dashboard' element={<Dashboard/>}/> 
-            <Route path='/onboarding' element={<OnBoarding/>}/> 
-          </>
-        }
+        { authToken && <Route path='/dashboard' element={<Dashboard/>}/> }
+        { authToken && <Route path='/onboarding' element={<OnBoarding/>}/> }
       </Routes>
-
     </BrowserRouter>
   );
 }

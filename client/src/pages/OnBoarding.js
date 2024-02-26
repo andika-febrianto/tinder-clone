@@ -115,7 +115,7 @@ const OnBoarding = () => {
                   required={true}
                   value="woman"
                   onChange={handleChange}
-                  checked={formData.gender_identity === 'women'}
+                  checked={formData.gender_identity === 'woman'}
               />
               <label htmlFor='woman-gender-identity'>Woman</label>
               
@@ -156,7 +156,7 @@ const OnBoarding = () => {
                     required={true}
                     value="woman"
                     onChange={handleChange}
-                    checked={formData.gender_interest ==='women'}
+                    checked={formData.gender_interest ==='woman'}
                 />
                 <label htmlFor='woman-gender-interest'>Woman</label>
                 

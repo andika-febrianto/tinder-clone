@@ -99,17 +99,20 @@ app.get('/user', async (req, res)=>{
   }
 })
 
-app.get('/users', async (req, res)=>{
+app.get('/gendered-users', async (req, res)=>{
   const client = new MongoClient(url)
-  
+  const gender = req.query.gender
+  const query = { gender_identity: { $eq : gender }}
+
+
   try {
       await client.connect()
       const database = await client.db('tinder-clone')
 
       const users = await database.collection('users')
-      const returnUsers = await users.find().toArray()
+      const findUsers = await users.find(query).toArray()
 
-      res.send(returnUsers)
+      res.send(findUsers)
 
   } finally {
     await client.close()
@@ -145,6 +148,86 @@ app.put('/user', async(req,res)=>{
       await client.close() 
   }
 
+})
+
+app.put('/addmatch', async (req,res)=>{
+  const client = new MongoClient(url)
+  const {userId, matchedUserId} = req.body
+  
+  try{
+    await client.connect()
+    const database = await client.db('tinder-clone')
+    const users = await database.collection('users')
+    
+    const query = {user_id: userId}
+    const updateDocument = {
+      $push : {matches : { user_id: matchedUserId }}
+    }
+     
+    const user = await users.updateOne(query, updateDocument)
+    res.send(user)
+
+  }finally {
+      await client.close() 
+  }
+
+})
+
+app.get('/users', async (req, res)=>{
+  const client = new MongoClient(url)
+  const  userIds = JSON.parse(req.query.userIds)
+
+  console.log('ids',userIds)
+
+  try {
+      await client.connect()
+      const database = await client.db('tinder-clone')
+      const users = await database.collection('users')
+
+      const pipeline = [
+        {
+          '$match':{
+            'user_id': {
+              '$in': userIds
+            }
+          }
+        }
+      ]
+
+      const foundUsers = await users.aggregate(pipeline).toArray()
+
+      console.log(foundUsers)
+
+      res.send(foundUsers)
+
+  } finally {
+    await client.close()
+  }
+})
+
+app.get('/messages', async (req, res)=>{
+  const client = new MongoClient(url)
+  const  { userId, correspondingUserId } =req.query 
+
+  console.log(userId, correspondingUserId)
+  try {
+      await client.connect()
+      const database = await client.db('tinder-clone')
+      const messages = await database.collection('messages')
+
+      const query = {
+        from_userId : userId, to_userId: correspondingUserId
+      }
+
+      const foundMessages = await messages.find(query).toArray()
+
+      console.log(foundMessages)
+
+      res.send(foundMessages)
+
+  } finally {
+    await client.close()
+  }
 })
 
 app.listen(PORT, ()=>console.log('server running on PORT '+ PORT))
