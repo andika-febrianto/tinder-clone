@@ -22,8 +22,6 @@ const MatchesDisplay = ({ matches, setClickUser }) => {
     getMatches()
   },[])
 
-  console.log(matchedProfiles)
-
   return (
     <div className='matches-display'>
       {

@@ -6,8 +6,6 @@ import ChatDisplay from './ChatDisplay'
 const ChatContainer = ({ user }) => {
   const [clickUser, setClickUser] = useState(null)
  
-  console.log('clickuser', clickUser)
-  
   return (
     <div className='chat-container'>
         <ChatHeader user={ user } />

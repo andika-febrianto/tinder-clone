@@ -37,9 +37,9 @@ const ChatDisplay = ({user, clickUser, }) => {
     getClickedUsersMessages()
   },[userId, clickUserId])
 
-  console.log(usersMessages);
 
   const messages = []
+  
   usersMessages?.forEach(message => {
     const formattedMessages = []
 
@@ -64,11 +64,15 @@ const ChatDisplay = ({user, clickUser, }) => {
 
   const descendingOrderMessages = messages?.sort((a,b) => a.timestamp.localeCompare(b.timestamp))
 
-
   return (
     <div>
       <Chat descendingOrderMessages={descendingOrderMessages} />
-      <ChatInput/>
+      <ChatInput 
+          user={user} 
+          clickedUser={clickUser} 
+          getUserMessages={getUsersMessages} 
+          getClickedUsersMessages={getClickedUsersMessages}
+      />
     </div>
   )
 }

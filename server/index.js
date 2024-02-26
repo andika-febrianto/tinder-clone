@@ -177,7 +177,6 @@ app.get('/users', async (req, res)=>{
   const client = new MongoClient(url)
   const  userIds = JSON.parse(req.query.userIds)
 
-  console.log('ids',userIds)
 
   try {
       await client.connect()
@@ -195,8 +194,6 @@ app.get('/users', async (req, res)=>{
       ]
 
       const foundUsers = await users.aggregate(pipeline).toArray()
-
-      console.log(foundUsers)
 
       res.send(foundUsers)
 
@@ -221,9 +218,25 @@ app.get('/messages', async (req, res)=>{
 
       const foundMessages = await messages.find(query).toArray()
 
-      console.log(foundMessages)
-
       res.send(foundMessages)
+
+  } finally {
+    await client.close()
+  }
+})
+
+app.post('/message', async (req, res)=>{
+  const client = new MongoClient(url)
+  const  message = req.body.message 
+
+  try {
+      await client.connect()
+      const database = await client.db('tinder-clone')
+      const messages = await database.collection('messages')
+ 
+      const insertedMessage = await messages.insertOne(message)
+ 
+      res.send(insertedMessage)
 
   } finally {
     await client.close()
