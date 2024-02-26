@@ -1,10 +1,12 @@
 const express = require('express')
 const { MongoClient } = require('mongodb')
-const url ='mongodb+srv://admin-andika:biocom1454@cluster0.ydgzo.mongodb.net/Cluster0?authSource=admin&replicaSet=atlas-u70cy9-shard-0&w=majority&readPreference=primary&retryWrites=true&ssl=true'
 const { v4:uuidv4 } = require('uuid')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
+
+require('dotenv').config()
+const url = process.env.URI 
 
 const PORT = 8000
 
@@ -51,6 +53,8 @@ app.post('/signup', async (req, res)=>{
     res.status(201).json({token, userId: generateUserId})
   }catch(err){
       console.log(err)
+  }finally{
+    await client.close()
   }
 })
 
@@ -76,6 +80,8 @@ app.post('/login', async(req,res)=>{
 
   }catch(err){
      console.log(err) 
+  }finally{
+    await client.close()
   }
 
 })

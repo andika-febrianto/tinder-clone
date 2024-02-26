@@ -131,13 +131,15 @@ const OnBoarding = () => {
             </div>
 
               <label htmlFor='show-gender'>Show gender on my profile</label>
-              <input id='show-gender'
-                  type='checkbox'
-                  name='show_gender'
-                  required={true}
-                  onChange={handleChange}
-                  checked={formData.show_gender}
-              />
+              <div>
+                <input id='show-gender'
+                    type='checkbox'
+                    name='show_gender'
+                    required={true}
+                    onChange={handleChange}
+                    checked={formData.show_gender}
+                />
+              </div>
 
               <label>Show me</label>
               <div className='multiple-input-container'>
