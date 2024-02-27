@@ -24,6 +24,11 @@ app.get('/',(req, res)=>{
   res.json('Hello welcome to myapp')
 })
 
+app.get('/test',(req, res)=>{
+  res.json('Hello welcome to test')
+})
+
+
 app.post('/signup', async (req, res)=>{
   const client = new MongoClient(url)
   const { email, password } = req.body
