@@ -23,7 +23,7 @@ const ChatDisplay = ({user, clickUser, }) => {
 
   const getClickedUsersMessages = async()=>{
     try {
-      const response = await axios.get('http://localhost:8000/messages',{
+      const response = await axios.get('https://shy-lime-pangolin-tux.cyclic.app/messages',{
         params: {userId: clickUserId, correspondingUserId: userId}
       })
       setClickedUsersMessages(response.data)
