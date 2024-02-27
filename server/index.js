@@ -13,7 +13,7 @@ const PORT = 8000
 const app = express()
 
 const corsOptions ={
-  origin:'https://shy-lime-pangolin-tux.cyclic.app/', 
+  origin:'https://sweet-piroshki-167d3d.netlify.app', 
   credentials:true,            //access-control-allow-credentials:true
   optionSuccessStatus:200
 }
