@@ -27,7 +27,7 @@ const OnBoarding = () => {
     e.preventDefault()
     
     try{
-      const response = await axios.put('http://localhost:8000/user', {formData})
+      const response = await axios.put('https://shy-lime-pangolin-tux.cyclic.app/user', {formData})
 
       const success = response.status === 200
 
