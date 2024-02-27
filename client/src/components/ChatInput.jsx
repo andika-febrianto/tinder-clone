@@ -16,7 +16,7 @@ const ChatInput = ({ user, clickedUser, getUserMessages, getClickedUsersMessages
     }
 
     try {
-      await axios.post('http://localhost:8000/message', { message })
+      await axios.post('https://shy-lime-pangolin-tux.cyclic.app/message', { message })
       getUserMessages()
       getClickedUsersMessages()
       setTextArea('')
