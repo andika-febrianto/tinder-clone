@@ -12,6 +12,11 @@ const PORT = 8000
 
 const app = express()
 
+const corsOptions ={
+  origin:'https://shy-lime-pangolin-tux.cyclic.app/', 
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200
+}
 app.use(cors())
 app.use(express.json())
 
